@@ -1,3 +1,6 @@
+# ignore SSH files
+ssh
+
 # Compiled class file
 *.class
 
