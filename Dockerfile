@@ -26,15 +26,13 @@ RUN update-alternatives --set java /usr/lib/jvm/jdk-17/bin/java
 RUN update-alternatives --set javac /usr/lib/jvm/jdk-17/bin/javac
 RUN update-alternatives --list java
 RUN update-alternatives --list javac
-RUN /usr/bin/java -v
+RUN /usr/bin/java -version
 RUN /bin/rm -f jdk-17_linux-x64_bin.deb
 # install Maven mvn
-RUN mkdir -p /opt
-RUN cd /opt
 RUN wget https://dlcdn.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz
 RUN tar xvfz apache-maven-3.8.4-bin.tar.gz
 RUN ln -s apache-maven-3.8.4 maven
-RUN /opt/maven/mvn --version
+# RUN /maven/bin/mvn -v
 RUN /bin/rm -f apache-maven-3.8.4-bin.tar.gz
 # install terminal multiplexer to have multiple terminals in one session
 # https://tmuxcheatsheet.com/
