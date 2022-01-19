@@ -26,7 +26,16 @@ RUN update-alternatives --set java /usr/lib/jvm/jdk-17/bin/java
 RUN update-alternatives --set javac /usr/lib/jvm/jdk-17/bin/javac
 RUN update-alternatives --list java
 RUN update-alternatives --list javac
-RUN /usr/bin/java -version
+RUN /usr/bin/java -v
+RUN /bin/rm -f jdk-17_linux-x64_bin.deb
+# install Maven mvn
+RUN mkdir -p /opt
+RUN cd /opt
+RUN wget https://dlcdn.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz
+RUN tar xvfz apache-maven-3.8.4-bin.tar.gz
+RUN ln -s apache-maven-3.8.4 maven
+RUN /opt/maven/mvn --version
+RUN /bin/rm -f apache-maven-3.8.4-bin.tar.gz
 # install terminal multiplexer to have multiple terminals in one session
 # https://tmuxcheatsheet.com/
 RUN apt install -y tmux
@@ -55,7 +64,7 @@ RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 USER devuser
 WORKDIR /home/devuser
 ADD --chown=devuser:devuser ./etc/vimrc /home/devuser/.vimrc
-ADD --chown=devuser:devuser ./README.md /home/devuser/CS-102-README.md
+ADD --chown=devuser:devuser ./README.md /home/devuser/ECE-366-README.md
 # configure YOUR GitHub credentials
 ADD --chown=devuser:devuser ./etc/.gitconfig /home/devuser/.gitconfig
 # add the pre-existing SSH files for your access to your GitHub account
