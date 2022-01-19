@@ -1,7 +1,6 @@
 [user]
 	name = "YOUR_FIRST_NAME YOUR_LAST_NAME"
 	email = YOUR@EMAIL_ADDRESS
- uncomment two lines below if you are on Mac OS
 [diff]
 	tool = bc
 [difftool "bc"]
