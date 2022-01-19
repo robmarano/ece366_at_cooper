@@ -17,8 +17,16 @@ RUN wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.deb
 RUN apt install -y libxtst6 libxrender1 libfreetype6
 RUN apt install -y libc6-i386 libc6-x32
 RUN apt install -y libxi6
-RUN dpkg -i jdk-17_linux-x64_bin.deb
-#RUN /usr/bin/java -version
+#RUN dpkg -i jdk-17_linux-x64_bin.deb
+RUN apt install ./jdk-17_linux-x64_bin.deb
+RUN ls -la /usr/lib/jvm/jdk-17/
+RUN update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk-17/bin/java" 0
+RUN update-alternatives --install "/usr/bin/javac" "javac" "/usr/lib/jvm/jdk-17/bin/javac" 0
+RUN update-alternatives --set java /usr/lib/jvm/jdk-17/bin/java
+RUN update-alternatives --set javac /usr/lib/jvm/jdk-17/bin/javac
+RUN update-alternatives --list java
+RUN update-alternatives --list javac
+RUN /usr/bin/java -version
 # install terminal multiplexer to have multiple terminals in one session
 # https://tmuxcheatsheet.com/
 RUN apt install -y tmux
