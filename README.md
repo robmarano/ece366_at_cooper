@@ -38,13 +38,13 @@ Follow [these instructions on GitHub](https://docs.github.com/en/get-started/get
 After installing Docker Hub and Git on your computers, follow the instructions:
 1. Open a terminal on your computer, ```cmd.exe``` on Windows or ```Terminal.app``` or ```iTerm2.app``` on Mac
 2. Change directory to either ```My Documents``` on Windows or your ```${HOME}``` directory on Mac OS. Then create a directory called ```dev``` where we will create sub-directories for projects and code respositories.
-    1. If you are on Mac, run command:
+    1. If you are on Mac or Linux host OS, run command:
     ```bash
     cd ${HOME}
     mkdir dev
     cd dev
     ```
-    2. If you are on Windows, replace %HOMEDRIVE% and %HOMEPATH% with your Windows home directory run command:
+    2. If you are on Windows host OS, replace %HOMEDRIVE% and %HOMEPATH% with your Windows home directory run command:
     ```bash
     cd %HOMEPATH%
     mkdir dev
@@ -62,7 +62,7 @@ docker build --rm -f Dockerfile -t ubuntu:ece366 .
 ```
 7. Run your new Docker image in a container and place in background
     Choose from either option below based upon your OS. See Docker [run manual](https://docs.docker.com/engine/reference/run/) to decode what the command above does.
-    1. If you are on Mac, run command:
+    1. If you are on Mac or Linux, run command:
     ```bash
     docker run --rm -dit -P --name ece366 -v ~/:/home/devuser/myHome ubuntu:ece366
     ```
