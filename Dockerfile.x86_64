@@ -10,24 +10,30 @@ ADD --chown=root:root ./etc/motd /etc/motd
 ADD --chown=root:root ./etc/issue /etc/issue
 # update your instance of Ubuntu server
 RUN apt update && apt upgrade -y
+RUN apt install -y bash-completion htop
 # install essential C development tools
 RUN apt install -y --force-yes build-essential gdb manpages-dev man-db sudo curl git-core vim wget
 # install Oracle JDK 17
-RUN wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.deb
-RUN apt install -y libxtst6 libxrender1 libfreetype6
-RUN apt install -y libc6-i386 libc6-x32
-RUN apt install -y libxi6
-#RUN dpkg -i jdk-17_linux-x64_bin.deb
-RUN apt install ./jdk-17_linux-x64_bin.deb
-RUN ls -la /usr/lib/jvm/jdk-17/
-RUN update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk-17/bin/java" 0
-RUN update-alternatives --install "/usr/bin/javac" "javac" "/usr/lib/jvm/jdk-17/bin/javac" 0
-RUN update-alternatives --set java /usr/lib/jvm/jdk-17/bin/java
-RUN update-alternatives --set javac /usr/lib/jvm/jdk-17/bin/javac
-RUN update-alternatives --list java
-RUN update-alternatives --list javac
+#RUN wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.deb
+#RUN apt install -y libxtst6 libxrender1 libfreetype6
+#RUN apt install -y libc6-i386 libc6-x32
+#RUN apt install -y libxi6
+##RUN dpkg -i jdk-17_linux-x64_bin.deb
+#RUN apt install ./jdk-17_linux-x64_bin.deb
+#RUN ls -la /usr/lib/jvm/jdk-17/
+#RUN update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk-17/bin/java" 0
+#RUN update-alternatives --install "/usr/bin/javac" "javac" "/usr/lib/jvm/jdk-17/bin/javac" 0
+#RUN update-alternatives --set java /usr/lib/jvm/jdk-17/bin/java
+#RUN update-alternatives --set javac /usr/lib/jvm/jdk-17/bin/javac
+#RUN update-alternatives --list java
+#RUN update-alternatives --list javac
+#RUN /usr/bin/java -version
+#RUN /bin/rm -f jdk-17_linux-x64_bin.deb
+# install Java OpenJDK 17
+#RUN add-apt-repository -y ppa:openjdk-r/ppa
+RUN apt install -y openjdk-17-jdk
 RUN /usr/bin/java -version
-RUN /bin/rm -f jdk-17_linux-x64_bin.deb
+ENV JAVA_HOME /usr/lib/jvm/jdk-17
 # install Maven mvn
 RUN wget https://dlcdn.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz
 RUN tar xvfz apache-maven-3.8.4-bin.tar.gz
@@ -44,7 +50,8 @@ ADD --chown=root:root ./etc/sudoers /etc/sudoers
 RUN apt install -y fortune cowsay
 # create a local user called "devuser" for local development
 RUN adduser \
-        --quiet \
+#        --quiet \
+        --debug \
         --disabled-password \
         --shell /bin/bash \
         --home /home/devuser \
@@ -61,7 +68,9 @@ RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 # create your C development directory called /home/devuser/dev/c
 USER devuser
 WORKDIR /home/devuser
+ADD --chown=devuser:devuser ./etc/docker-prompt /home/devuser/.docker-prompt
 ADD --chown=devuser:devuser ./etc/vimrc /home/devuser/.vimrc
+ADD --chown=devuser:devuser ./etc/tmux.conf /home/devuser/.tmux.conf
 ADD --chown=devuser:devuser ./README.md /home/devuser/ECE-366-README.md
 # configure YOUR GitHub credentials
 ADD --chown=devuser:devuser ./etc/.gitconfig /home/devuser/.gitconfig
@@ -72,4 +81,5 @@ ADD --chown=devuser:devuser ./ssh/id_ed25519 /home/devuser/.ssh/id_ed25519
 ADD --chown=devuser:devuser ./ssh/id_ed25519.pub /home/devuser/.ssh/id_ed25519.pub
 RUN chmod 400 /home/devuser/.ssh/id_ed25519
 RUN chmod 400 /home/devuser/.ssh/id_ed25519.pub
+ENV TERM xterm-256color
 SHELL ["/bin/bash", "-c"]

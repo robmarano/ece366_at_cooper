@@ -51,24 +51,33 @@ After installing Docker Hub and Git on your computers, follow the instructions:
     cd dev
     ```
 3. Then clone the repo to your computer using the command
-```bash
-git clone https://github.com/robmarano/ece366_at_cooper
-```
+    ```bash
+    git clone https://github.com/robmarano/ece366_at_cooper
+    ```
 4. Change directory into ```./ece366_at_cooper``` and change to "environment" branch with ```git checkout environment```
 5. Update your full name and email address in the file ```etc/.gitconfig```
 6. Build the Docker image with the command. See Docker [build manual](https://docs.docker.com/engine/reference/commandline/build/) to decode what the command above does.
-```bash
-docker build --rm -f Dockerfile -t ubuntu:ece366 .
-```
+
+    If you're on a host computer with ISA of x86_64:
+    ```bash
+    docker build --rm -f Dockerfile.x86_64 -t ubuntu:ece366 .
+    ```
+
+    If you're on a host computer with ISA of arm64 (Apple M1, for example):
+    ```bash
+    docker build --rm -f Dockerfile.arm64 -t ubuntu:ece366 .
+    ```
+
+
 7. Run your new Docker image in a container and place in background
     Choose from either option below based upon your OS. See Docker [run manual](https://docs.docker.com/engine/reference/run/) to decode what the command above does.
     1. If you are on Mac or Linux, run command:
     ```bash
-    docker run --rm -dit -P --name ece366 -v ~/:/home/devuser/myHome ubuntu:ece366
+    docker run --rm -dit -e "TERM=xterm-256color" -P --name ece366 -v ~/:/home/devuser/myHome ubuntu:ece366
     ```
     2. If you are on Windows, replace %HOMEDRIVE% and %HOMEPATH% with your Windows home directory run command:
     ```bash
-    docker run --rm -dit -P --name ece366 --security-opt seccomp=unconfined --mount type=bind,source="%HOMEDRIVE%%HOMEPATH%\Documents",destination=/home/devuser/myHome ubuntu:ece366
+    docker run --rm -dit -e "TERM=xterm-256color" -P --name ece366 --security-opt seccomp=unconfined --mount type=bind,source="%HOMEDRIVE%%HOMEPATH%\Documents",destination=/home/devuser/myHome ubuntu:ece366
     ```
 8. Find the Docker container ID using the command ```docker ps```
 9. Login to your new Docker container to being coding ```docker exec -i -t {CONTAINER ID} /bin/bash```
@@ -76,9 +85,9 @@ docker build --rm -f Dockerfile -t ubuntu:ece366 .
     1. Follow the instructions to create SSH keys in your Linux container [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
     2. Follow the instructions to add the keys to your GitHub account [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
 11. Save your keys to your host computer from your Linux container
-```bash
-cd ~ && cp -r ./.ssh ~/myHome/ssh && ~/myHome/dev/ece366_at_cooper/ssh
-```
+    ```bash
+    cd ~ && cp -r ./.ssh ~/myHome/ssh && ~/myHome/dev/ece366_at_cooper/ssh
+    ```
 12. Exit your Linux container
 13. Kill your container
 14. Remove the cs102-student image

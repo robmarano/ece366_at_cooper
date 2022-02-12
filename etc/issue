@@ -1,4 +1,4 @@
-Version: 1.6
-New Features: Added Oracle Java JDK 17
-New Fixes: None
+Version: 1.7
+New Features: None
+New Fixes: Added a separate Dockerfile for x86_64 and for arm64 (Apple M1 chip)
 Issues: None
