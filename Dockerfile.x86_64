@@ -40,6 +40,8 @@ RUN tar xvfz apache-maven-3.8.4-bin.tar.gz
 RUN ln -s apache-maven-3.8.4 maven
 # RUN /maven/bin/mvn -v
 RUN /bin/rm -f apache-maven-3.8.4-bin.tar.gz
+# install nodejs and npm for React dev
+RUN apt install -y nodejs npm
 # install terminal multiplexer to have multiple terminals in one session
 # https://tmuxcheatsheet.com/
 RUN apt install -y tmux
