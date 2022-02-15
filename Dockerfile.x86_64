@@ -33,7 +33,7 @@ RUN apt install -y --force-yes build-essential gdb manpages-dev man-db sudo curl
 #RUN add-apt-repository -y ppa:openjdk-r/ppa
 RUN apt install -y openjdk-17-jdk
 RUN /usr/bin/java -version
-ENV JAVA_HOME /usr/lib/jvm/jdk-17
+ENV JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64
 # install Maven mvn
 RUN wget https://dlcdn.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz
 RUN tar xvfz apache-maven-3.8.4-bin.tar.gz
