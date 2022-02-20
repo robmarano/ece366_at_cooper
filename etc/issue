@@ -1,4 +1,4 @@
-Version: 1.7
+Version: 1.8
 New Features: None
-New Fixes: Added a separate Dockerfile for x86_64 and for arm64 (Apple M1 chip)
+New Fixes: Cleaned out Dockerfile; moved devuser to ece366 as the user id.
 Issues: None

@@ -73,11 +73,11 @@ After installing Docker Hub and Git on your computers, follow the instructions:
     Choose from either option below based upon your OS. See Docker [run manual](https://docs.docker.com/engine/reference/run/) to decode what the command above does.
     1. If you are on Mac or Linux, run command:
     ```bash
-    docker run --rm -dit -e "TERM=xterm-256color" -P --name ece366 -v ~/:/home/devuser/myHome ubuntu:ece366
+    docker run --rm -dit -e "TERM=xterm-256color" -P --expose 3000 --expose 8080 -p 3000:3000 -p 8080:8080 --name ece366 --security-opt seccomp=unconfined -v ~/:/home/ece366/myHome ubuntu:ece366
     ```
     2. If you are on Windows, replace %HOMEDRIVE% and %HOMEPATH% with your Windows home directory run command:
     ```bash
-    docker run --rm -dit -e "TERM=xterm-256color" -P --name ece366 --security-opt seccomp=unconfined --mount type=bind,source="%HOMEDRIVE%%HOMEPATH%\Documents",destination=/home/devuser/myHome ubuntu:ece366
+    docker run --rm -dit -e "TERM=xterm-256color" -P --expose 3000 --expose 8080 -p 3000:3000 -p 8080:8080 --name ece366 --security-opt seccomp=unconfined --mount type=bind,source="%HOMEDRIVE%%HOMEPATH%\Documents",destination=/home/ece366/myHome ubuntu:ece366
     ```
 8. Find the Docker container ID using the command ```docker ps```
 9. Login to your new Docker container to being coding ```docker exec -i -t {CONTAINER ID} /bin/bash```
@@ -126,7 +126,7 @@ docker container rm CONTAINER_ID
 ```bash
 docker image ls
 ```
-Take the ```IMAGE_ID``` of the image for cs102-student
+Take the ```IMAGE_ID``` of the image for ece366
 ```bash
 docker image rm IMAGE_ID
 ```
