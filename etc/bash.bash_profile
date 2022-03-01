@@ -40,5 +40,6 @@ echo -e $gitver
 }
 
 #It's important to escape colors with \[ to indicate the length is 0
-PS1='\u@\[${c_red}\]\W\[${c_sgr0}\]\[\[$(branch_color)\]$(parse_git_branch)\[${c_sgr0}\]$ '
-source ~/.docker-prompt
+#PS1='\u@\[${c_red}\]\W\[${c_sgr0}\]\[\[$(branch_color)\]$(parse_git_branch)\[${c_sgr0}\]$ '
+#source ~/.docker-prompt
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\n \[\[$(branch_color)\]$(parse_git_branch)\[${c_sgr0}\]\$ '

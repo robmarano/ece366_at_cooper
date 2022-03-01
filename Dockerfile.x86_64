@@ -62,6 +62,7 @@ USER ece366
 WORKDIR /home/ece366
 ADD --chown=ece366:ece366 ./etc/docker-prompt /home/ece366/.docker-prompt
 ADD --chown=ece366:ece366 ./etc/vimrc /home/ece366/.vimrc
+ADD --chown=ece366:ece366 ./etc/bash.bash_profile /home/ece366/.bash_profile
 ADD --chown=ece366:ece366 ./etc/tmux.conf /home/ece366/.tmux.conf
 ADD --chown=ece366:ece366 ./README.md /home/ece366/ECE-366-README.md
 # configure YOUR GitHub credentials
