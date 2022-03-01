@@ -80,7 +80,7 @@ After installing Docker Hub and Git on your computers, follow the instructions:
     docker run --rm -dit -e "TERM=xterm-256color" -P --expose 3000 --expose 8080 -p 3000:3000 -p 8080:8080 --name ece366 --security-opt seccomp=unconfined --mount type=bind,source="%HOMEDRIVE%%HOMEPATH%\Documents",destination=/home/ece366/myHome ubuntu:ece366
     ```
 8. Find the Docker container ID using the command ```docker ps```
-9. Login to your new Docker container to being coding ```docker exec -i -t {CONTAINER ID} /bin/bash```
+9. Login to your new Docker container to being coding ```docker exec -it ece366 /bin/bash -l```
 10. Create your ssh keys for GitHub usage.
     1. Follow the instructions to create SSH keys in your Linux container [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
     2. Follow the instructions to add the keys to your GitHub account [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
