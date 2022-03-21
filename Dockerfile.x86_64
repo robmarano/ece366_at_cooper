@@ -23,7 +23,7 @@ RUN apt install -y openjdk-17-jdk-headless
 RUN /usr/bin/java -version
 ENV JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64
 # install Maven mvn
-RUN wget https://dlcdn.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz
+RUN wget https://dlcdn.apache.org/maven/maven-3/3.8.5/binaries/apache-maven-3.8.5-bin.tar.gz
 RUN tar xvfz apache-maven-3.8.4-bin.tar.gz
 RUN ln -s apache-maven-3.8.4 maven
 # RUN /maven/bin/mvn -v
