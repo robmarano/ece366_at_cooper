@@ -1,0 +1,5 @@
+CREATE USER 'borsa'@'%'
+    IDENTIFIED BY 'borsa';
+GRANT ALL PRIVILEGES ON *.* TO 'borsa'@'%'
+    WITH GRANT OPTION;
+CREATE DATABASE borsa;
