@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 public class AppTest 
 {
     public static final int APP_FIELD_TEST = 6;
+    public static final int APP_FIELD_TEST_SET = 2;
     private App app;
 
     @BeforeClass
@@ -25,6 +26,14 @@ public class AppTest
         System.out.println("Running AppTest.verifyAppConstructor()");
         Assert.assertEquals(app.getAppField(),APP_FIELD_TEST);
         System.out.println("Finished AppTest.verifyAppConstructor()");
+    }
+
+    @Test
+    public void verifySetAppField() {
+        System.out.println("Running AppTest.verifySetAppField()");
+        app.setAppField(APP_FIELD_TEST_SET);
+        Assert.assertEquals(app.getAppField(),APP_FIELD_TEST_SET);
+        System.out.println("Finished AppTest.verifySetAppField()");
     }
 
     @AfterClass
